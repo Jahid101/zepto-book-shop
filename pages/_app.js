@@ -7,9 +7,9 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <title>Zepto Book Shop</title>
-        <Component {...pageProps} />;
-        <Toaster />
       </Head>
+      <Component {...pageProps} />
+      <Toaster />
     </>
   )
 }
