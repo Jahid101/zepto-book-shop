@@ -9,7 +9,184 @@ import Pagination from '@/components/customUI/Pagination';
 const BookList = () => {
     const [loading, setLoading] = useState(false);
     const [totalBooks, setTotalBooks] = useState(null);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([
+        {
+            "id": 84,
+            "title": "Frankenstein; Or, The Modern Prometheus",
+            "authors": [
+                {
+                    "name": "Shelley, Mary Wollstonecraft",
+                    "birth_year": 1797,
+                    "death_year": 1851
+                }
+            ],
+            "translators": [],
+            "subjects": [
+                "Frankenstein's monster (Fictitious character) -- Fiction",
+                "Frankenstein, Victor (Fictitious character) -- Fiction",
+                "Gothic fiction",
+                "Horror tales",
+                "Monsters -- Fiction",
+                "Science fiction",
+                "Scientists -- Fiction"
+            ],
+            "bookshelves": [
+                "Browsing: Culture/Civilization/Society",
+                "Browsing: Fiction",
+                "Browsing: Gender & Sexuality Studies",
+                "Browsing: Literature",
+                "Browsing: Science-Fiction & Fantasy",
+                "Gothic Fiction",
+                "Movie Books",
+                "Precursors of Science Fiction",
+                "Science Fiction by Women"
+            ],
+            "languages": [
+                "en"
+            ],
+            "copyright": false,
+            "media_type": "Text",
+            "formats": {
+                "text/html": "https://www.gutenberg.org/ebooks/84.html.images",
+                "application/epub+zip": "https://www.gutenberg.org/ebooks/84.epub3.images",
+                "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/84.kf8.images",
+                "application/rdf+xml": "https://www.gutenberg.org/ebooks/84.rdf",
+                "image/jpeg": "https://www.gutenberg.org/cache/epub/84/pg84.cover.medium.jpg",
+                "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/84.txt.utf-8",
+                "application/octet-stream": "https://www.gutenberg.org/cache/epub/84/pg84-h.zip"
+            },
+            "download_count": 78467
+        },
+        {
+            "id": 1513,
+            "title": "Romeo and Juliet",
+            "authors": [
+                {
+                    "name": "Shakespeare, William",
+                    "birth_year": 1564,
+                    "death_year": 1616
+                }
+            ],
+            "translators": [],
+            "subjects": [
+                "Conflict of generations -- Drama",
+                "Juliet (Fictitious character) -- Drama",
+                "Romeo (Fictitious character) -- Drama",
+                "Tragedies",
+                "Vendetta -- Drama",
+                "Verona (Italy) -- Drama",
+                "Youth -- Drama"
+            ],
+            "bookshelves": [
+                "Browsing: Fiction",
+                "Browsing: Literature",
+                "Browsing: Poetry"
+            ],
+            "languages": [
+                "en"
+            ],
+            "copyright": false,
+            "media_type": "Text",
+            "formats": {
+                "text/html": "https://www.gutenberg.org/ebooks/1513.html.images",
+                "application/epub+zip": "https://www.gutenberg.org/ebooks/1513.epub3.images",
+                "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/1513.kf8.images",
+                "application/rdf+xml": "https://www.gutenberg.org/ebooks/1513.rdf",
+                "image/jpeg": "https://www.gutenberg.org/cache/epub/1513/pg1513.cover.medium.jpg",
+                "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/1513.txt.utf-8",
+                "application/octet-stream": "https://www.gutenberg.org/cache/epub/1513/pg1513-h.zip"
+            },
+            "download_count": 62300
+        },
+        {
+            "id": 1342,
+            "title": "Pride and Prejudice",
+            "authors": [
+                {
+                    "name": "Austen, Jane",
+                    "birth_year": 1775,
+                    "death_year": 1817
+                }
+            ],
+            "translators": [],
+            "subjects": [
+                "Courtship -- Fiction",
+                "Domestic fiction",
+                "England -- Fiction",
+                "Love stories",
+                "Sisters -- Fiction",
+                "Social classes -- Fiction",
+                "Young women -- Fiction"
+            ],
+            "bookshelves": [
+                "Best Books Ever Listings",
+                "Browsing: Culture/Civilization/Society",
+                "Browsing: Fiction",
+                "Browsing: Literature",
+                "Harvard Classics"
+            ],
+            "languages": [
+                "en"
+            ],
+            "copyright": false,
+            "media_type": "Text",
+            "formats": {
+                "text/html": "https://www.gutenberg.org/ebooks/1342.html.images",
+                "application/epub+zip": "https://www.gutenberg.org/ebooks/1342.epub3.images",
+                "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/1342.kf8.images",
+                "application/rdf+xml": "https://www.gutenberg.org/ebooks/1342.rdf",
+                "image/jpeg": "https://www.gutenberg.org/cache/epub/1342/pg1342.cover.medium.jpg",
+                "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/1342.txt.utf-8",
+                "application/octet-stream": "https://www.gutenberg.org/cache/epub/1342/pg1342-h.zip"
+            },
+            "download_count": 58812
+        },
+        {
+            "id": 2701,
+            "title": "Moby Dick; Or, The Whale",
+            "authors": [
+                {
+                    "name": "Melville, Herman",
+                    "birth_year": 1819,
+                    "death_year": 1891
+                }
+            ],
+            "translators": [],
+            "subjects": [
+                "Adventure stories",
+                "Ahab, Captain (Fictitious character) -- Fiction",
+                "Mentally ill -- Fiction",
+                "Psychological fiction",
+                "Sea stories",
+                "Ship captains -- Fiction",
+                "Whales -- Fiction",
+                "Whaling -- Fiction",
+                "Whaling ships -- Fiction"
+            ],
+            "bookshelves": [
+                "Best Books Ever Listings",
+                "Browsing: Fiction",
+                "Browsing: Literature"
+            ],
+            "languages": [
+                "en"
+            ],
+            "copyright": false,
+            "media_type": "Text",
+            "formats": {
+                "text/html": "https://www.gutenberg.org/ebooks/2701.html.images",
+                "text/html; charset=utf-8": "https://www.gutenberg.org/files/2701/2701-h/2701-h.htm",
+                "application/epub+zip": "https://www.gutenberg.org/ebooks/2701.epub3.images",
+                "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/2701.kf8.images",
+                "text/plain; charset=utf-8": "https://www.gutenberg.org/files/2701/2701-0.txt",
+                "application/rdf+xml": "https://www.gutenberg.org/ebooks/2701.rdf",
+                "image/jpeg": "https://www.gutenberg.org/cache/epub/2701/pg2701.cover.medium.jpg",
+                "application/octet-stream": "https://www.gutenberg.org/cache/epub/2701/pg2701-h.zip",
+                "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/2701.txt.utf-8"
+            },
+            "download_count": 58362
+        },
+    ]);
     const { toast } = useToast();
     const [date, setDate] = useState(null)
     const [filters, setFilters] = useState({
@@ -18,7 +195,7 @@ const BookList = () => {
 
 
     useEffect(() => {
-        getBookList()
+        // getBookList()
     }, [filters]);
 
 
@@ -46,6 +223,24 @@ const BookList = () => {
                 title: 'Something went wrong',
             })
             setLoading(false);
+        }
+    }
+
+
+    const getTopics = (item) => {
+        console.log('item ==>', item);
+        if (item?.toString().length > 80) {
+            // item.map((it, index) => {
+            //     console.log('it ==>', it);
+
+            return (
+                <span>{item?.toString()?.substring(0, 80) + "..."}</span>
+            )
+            // })
+        } else {
+            return (
+                <span>{index != 0 && ', '}{it}</span>
+            )
         }
     }
 
@@ -120,7 +315,7 @@ const BookList = () => {
                                         </div>
 
                                         <div className='flex gap-1 font-sans text-base leading-relaxed text-gray-700 antialiased'>
-                                            <p className='font-semibold'>Authors:</p>
+                                            <p className='font-semibold'>ID:</p>
                                             <p>{item?.id}</p>
                                         </div>
 
@@ -138,11 +333,14 @@ const BookList = () => {
                                         <div className='flex gap-1 font-sans text-base leading-relaxed text-gray-700 antialiased'>
                                             <p className='font-semibold'>Genre/Topics:</p>
                                             <p className='text-left'>
-                                                {item?.subjects?.length > 0 && item?.subjects?.map((item, index) => {
+                                                {/* {getTopics(item?.subjects)} */}
+                                                {item?.subjects?.toString()?.length > 95 ? item?.subjects?.toString()?.substring(0, 95) + " ....." : item?.subjects?.toString()?.substring(0, 95)}
+                                                {/* {item?.subjects?.length > 0 && item?.subjects?.map((item, index) => {
                                                     return (
+                                                        // <span key={item}>{index != 0 && ', '}{item?.length > 80 ? item?.substring(0, 80) + "..." : item?.substring(0, 80)}</span>
                                                         <span key={item}>{index != 0 && ', '}{item}</span>
                                                     )
-                                                })}
+                                                })} */}
                                             </p>
                                         </div>
 
