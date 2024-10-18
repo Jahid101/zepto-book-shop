@@ -6,4 +6,5 @@ Live: https://zepto-book-shop.vercel.app
 -   Open terminal
     -   Run **yarn** or **npm install**.
     -   Run **yarn dev** or **npm run dev** to see the result in browser.
+    
 # zepto-book-shop
