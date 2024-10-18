@@ -8,6 +8,11 @@ import { booksAPIs } from '@/utility/api/bookApi';
 import { getRandomLoadingMsgs } from '@/utility/utilityFunctions';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import NoImg from '../../public/images/noImg.jpg';
+import { Button } from '@/components/ui/button';
+import { LuDownload } from "react-icons/lu";
+import { LiaReadme } from "react-icons/lia";
+
 
 const BookDetailsPage = () => {
     const router = useRouter()
@@ -56,7 +61,7 @@ const BookDetailsPage = () => {
         <div>
             <TopNavBar />
             <div className="pt-24"></div>
-            <div className='max-w-[1570px] m-auto'>
+            <div className='w-fit max-w-[1570px] m-auto px-2 sm:px-5 pb-10'>
 
                 {!loading && !data?.id &&
                     <NoData />
@@ -66,20 +71,74 @@ const BookDetailsPage = () => {
                 }
 
                 {!loading && data?.id &&
-                    <div className='flex items-center justify-center gap-7 px-5 w-full'>
-                        <CardContent className="w-full"></CardContent>
+                    <CardContent className="flex flex-col sm:flex-row justify-center gap-7 p-2 sm:px-5 sm:py-7 w-full ">
+                        <div className='w-full sm:w-[40%]'>
+                            <img
+                                src={data?.formats['image/jpeg'] || NoImg}
+                                alt="book"
+                                className="rounded-lg max-h-[400px] sm:max-h-[700px] w-[400px] shadow-xl border m-auto"
+                            />
+                        </div>
 
-                        <CardContent className="w-full">
+                        <div className="w-full sm:w-[60%] pb-5">
+                            <h5 className="text-2xl font-bold text-blue-gray-900">
+                                {data?.title}
+                            </h5>
 
-                            <div className="">
-                                {data?.subjects.slice(0, 3).map((subject, index) => (
-                                    <Badge key={index} className='bg-gray-600 text-white ml-2'>
-                                        #{subject.split(' -- ')[0]}
-                                    </Badge>
-                                ))}
+                            <div className='flex gap-1 text-base text-gray-700 my-2'>
+                                <p className='font-semibold'>By</p>
+                                <p>
+                                    {data?.authors?.length > 0 && data?.authors?.map((author, index) => {
+                                        return (
+                                            <span key={author?.name}>{index != 0 && ', '}{author?.name}</span>
+                                        )
+                                    })}
+                                </p>
                             </div>
-                        </CardContent>
-                    </div>
+
+                            <div className='flex gap-1 text-base text-gray-700 my-2'>
+                                <p className='font-semibold'>Total downloads: </p>
+                                <p>
+                                    {data?.download_count}
+                                </p>
+                            </div>
+
+                            <div className='flex gap-1 text-base text-gray-700 my-2'>
+                                <p className='font-semibold'>Available languages: </p>
+                                <p className='uppercase'>
+                                    {data?.languages?.toString()}
+                                </p>
+                            </div>
+
+                            {data?.subjects.map((subject, index) => (
+                                <Badge key={index} className='bg-gray-600 text-white ml-1 mt-1'>
+                                    {subject.split(' -- ')[0]}
+                                </Badge>
+                            ))}
+
+                            <div className='mt-5 flex flex-col sm:flex-row gap-3'>
+                                {data?.formats['application/octet-stream'] &&
+                                    <Button
+                                        className="mr-3"
+                                        variant="outline"
+                                        onClick={() => window.open(data?.formats['application/octet-stream'])}
+                                    >
+                                        Download the book &nbsp;<LuDownload />
+                                    </Button>
+                                }
+
+                                {data?.formats['text/html'] &&
+                                    <Button
+                                        className="mr-3"
+                                        onClick={() => window.open(data?.formats['text/html'])}
+                                    >
+                                        Read Online &nbsp;<LiaReadme className='w-5 h-4' />
+                                    </Button>
+                                }
+                            </div>
+
+                        </div>
+                    </CardContent>
                 }
             </div>
         </div>
