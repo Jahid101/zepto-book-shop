@@ -14,7 +14,7 @@ export const booksAPIs = {
     },
     getBookById: async (bookId) => {
         const data = await axios({
-            url: Constants.Api.books.books + '/' + bookId,
+            url: Constants.Api.books.books + bookId,
             method: "GET",
         })
         return data.data;

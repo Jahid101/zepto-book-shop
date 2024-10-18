@@ -8,7 +8,7 @@ const CardContent = (props) => {
         <div
             {...props}
             className={cn(
-                "flex w-full flex-col gap-3 rounded-xl border p-5 shadow",
+                "bg-white rounded-xl border p-5 shadow",
                 props.className
             )}
         />
