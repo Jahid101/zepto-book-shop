@@ -1,13 +1,7 @@
+import CardContent from '@/components/customUI/CardContent';
+import NoData from '@/components/customUI/NoData';
 import Pagination from '@/components/customUI/Pagination';
 import CustomLoader from '@/components/loader/loader';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
-import { booksAPIs } from '@/utility/api/bookApi';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { GoHeart, GoHeartFill } from "react-icons/go";
-import NoImg from '../../public/images/noImg.jpg';
 import {
     AlertDialog,
     AlertDialogCancel,
@@ -17,6 +11,8 @@ import {
     AlertDialogHeader,
     AlertDialogTitle
 } from "@/components/ui/alert-dialog";
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { SearchInput } from '@/components/ui/searchInput';
 import {
     Select,
@@ -25,9 +21,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import CardContent from '@/components/customUI/CardContent';
-import NoData from '@/components/customUI/NoData';
+import { useToast } from '@/components/ui/use-toast';
+import { booksAPIs } from '@/utility/api/bookApi';
 import { getRandomLoadingMsgs } from '@/utility/utilityFunctions';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { GoHeart, GoHeartFill } from "react-icons/go";
 
 
 const BookList = () => {
@@ -63,7 +62,10 @@ const BookList = () => {
 
 
     useEffect(() => {
-        getBookList()
+        const oldFilters = localStorage.getItem('filters')
+        const lsFilters = JSON.parse(oldFilters) || filters;
+        setFilters(lsFilters)
+        getBookList(lsFilters)
     }, []);
 
     useEffect(() => {
@@ -75,6 +77,8 @@ const BookList = () => {
 
     const getBookList = async (filter = filters) => {
         setLoading(true)
+
+        localStorage.setItem('filters', JSON.stringify(filter))
 
         try {
             const response = await booksAPIs.getAllBook(filter)
@@ -107,7 +111,7 @@ const BookList = () => {
             <div className="relative flex w-full max-w-[23rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg transition-transform duration-300 transform hover:scale-105" key={item?.id}>
                 <div className="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-primary p-3">
                     <img
-                        src={item?.formats['image/jpeg'] || NoImg}
+                        src={item?.formats['image/jpeg'] || 'images/noImg.jpg'}
                         alt="book"
                         className="rounded-lg mx-auto h-[300px] w-[385px]s shadow-xl border"
                     />
@@ -228,13 +232,14 @@ const BookList = () => {
 
             {/* Filters */}
             <div className='px-5'>
-                <CardContent className="flex flex-col lg:flex-row justify-between w-full max-w-[1560px] mb-7 mx-auto">
+                <CardContent className="flex flex-col lg:flex-row justify-end gap-5 w-full max-w-[1560px] mb-7 mx-autos">
                     <div className='flex items-center gap-5 flex-wrap'>
                         <div className="w-full md:w-72">
                             <p className='text-md text-primary mb-1'>Filter by Genre/Topic</p>
 
                             <Select
                                 value={filters.topic}
+                                disabled={loading}
                                 onValueChange={(value) => {
                                     setFilters({ ...filters, topic: value })
                                 }}
@@ -265,6 +270,7 @@ const BookList = () => {
                                 id="search"
                                 placeholder="Search"
                                 className="placeholder:text-default"
+                                disabled={loading}
                                 icon={filters?.search && filters?.search?.length > 0}
                                 value={filters?.search}
                                 onClear={() => {
@@ -277,33 +283,37 @@ const BookList = () => {
                         </div>
                     </div>
 
-                    <div className='flex items-center gap-3 justify-end mt-5 md:mt-0'>
+                    <div className='flex items-end gap-3 justify-end mt-5 md:mt-0'>
                         <p
                             className='cursor-pointer underline text-tertiary'
                             onClick={() => {
-                                setFilters({
-                                    page: 0,
-                                    page_size: 24,
-                                    search: '',
-                                    topic: '',
-                                })
-                                getBookList({
-                                    page: 0,
-                                    page_size: 24,
-                                    search: '',
-                                    topic: '',
-                                })
+                                if (!loading) {
+                                    setFilters({
+                                        page: 0,
+                                        page_size: 24,
+                                        search: '',
+                                        topic: '',
+                                    })
+                                    getBookList({
+                                        page: 0,
+                                        page_size: 24,
+                                        search: '',
+                                        topic: '',
+                                    })
+                                }
                             }}
                         >
                             Clear filter
                         </p>
 
                         <Button
+                            disabled={loading}
                             onClick={() => getBookList()}
                         >
                             Filter
                         </Button>
                     </div>
+
                 </CardContent>
             </div>
 
@@ -339,6 +349,7 @@ const BookList = () => {
                     selectedPage={filters?.page}
                     setPage={(page) => {
                         setFilters({ ...filters, page: page?.selected })
+                        getBookList({ ...filters, page: page?.selected })
                     }}
                 />
             }
