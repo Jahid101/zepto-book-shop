@@ -32,7 +32,7 @@ import { GoHeart, GoHeartFill } from "react-icons/go";
 const BookList = () => {
     const router = useRouter()
     const [openAlert, setOpenAlert] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [totalBooks, setTotalBooks] = useState(null);
     const [wishlistData, setWishlistData] = useState([])
     const [selectedBook, setSelectedBook] = useState({});
@@ -90,12 +90,7 @@ const BookList = () => {
             }
         } catch (error) {
             console.log("error ==>", error);
-            if (error?.response?.data == "Not found") {
-                setData([])
-                setLoading(false);
-                return
-            }
-
+            setData([])
             toast({
                 variant: "error",
                 title: 'Something went wrong',
