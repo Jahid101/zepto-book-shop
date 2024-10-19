@@ -62,7 +62,10 @@ const BookList = () => {
 
 
     useEffect(() => {
-        getBookList()
+        const oldFilters = localStorage.getItem('filters')
+        const lsFilters = JSON.parse(oldFilters) || filters;
+        setFilters(lsFilters)
+        getBookList(lsFilters)
     }, []);
 
     useEffect(() => {
@@ -74,6 +77,8 @@ const BookList = () => {
 
     const getBookList = async (filter = filters) => {
         setLoading(true)
+
+        localStorage.setItem('filters', JSON.stringify(filter))
 
         try {
             const response = await booksAPIs.getAllBook(filter)
