@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/router';
 import { GoHeartFill } from "react-icons/go";
-import NoImg from '../../public/images/noImg.jpg';
 
 
 const Wishlist = ({ data = [], setWishlist }) => {
@@ -34,7 +33,7 @@ const Wishlist = ({ data = [], setWishlist }) => {
                                     <div className="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-primary py-2">
                                         {/* <Image */}
                                         <img
-                                            src={item?.formats['image/jpeg'] || NoImg}
+                                            src={item?.formats['image/jpeg'] || 'images/noImg.jpg'}
                                             alt="book"
                                             className="rounded-lg mx-auto h-[300px] w-[385px]s shadow-xl border"
                                         // width={385}
