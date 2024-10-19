@@ -4,8 +4,9 @@ import axios from "axios";
 export const booksAPIs = {
     getAllBook: async (filters = null) => {
         const data = await axios({
-            url: Constants.Api.books.books + `?page=${filters?.page + 1}`,
+            url: Constants.Api.books.books,
             method: "GET",
+            params: { ...filters, page: filters?.page + 1 },
             // headers: {
             //     authorization: 'Bearer' + ' ' + token,
             // },

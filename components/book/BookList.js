@@ -17,6 +17,17 @@ import {
     AlertDialogHeader,
     AlertDialogTitle
 } from "@/components/ui/alert-dialog";
+import { SearchInput } from '@/components/ui/searchInput';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import CardContent from '@/components/customUI/CardContent';
+import NoData from '@/components/customUI/NoData';
+import { getRandomLoadingMsgs } from '@/utility/utilityFunctions';
 
 
 const BookList = () => {
@@ -26,288 +37,34 @@ const BookList = () => {
     const [totalBooks, setTotalBooks] = useState(null);
     const [wishlistData, setWishlistData] = useState([])
     const [selectedBook, setSelectedBook] = useState({});
-    const [data, setData] = useState([
-        {
-            "id": 84,
-            "title": "Frankenstein; Or, The Modern Prometheus",
-            "authors": [
-                {
-                    "name": "Shelley, Mary Wollstonecraft",
-                    "birth_year": 1797,
-                    "death_year": 1851
-                }
-            ],
-            "translators": [],
-            "subjects": [
-                "Frankenstein's monster (Fictitious character) -- Fiction",
-                "Frankenstein, Victor (Fictitious character) -- Fiction",
-                "Gothic fiction",
-                "Horror tales",
-                "Monsters -- Fiction",
-                "Science fiction",
-                "Scientists -- Fiction"
-            ],
-            "bookshelves": [
-                "Browsing: Culture/Civilization/Society",
-                "Browsing: Fiction",
-                "Browsing: Gender & Sexuality Studies",
-                "Browsing: Literature",
-                "Browsing: Science-Fiction & Fantasy",
-                "Gothic Fiction",
-                "Movie Books",
-                "Precursors of Science Fiction",
-                "Science Fiction by Women"
-            ],
-            "languages": [
-                "en"
-            ],
-            "copyright": false,
-            "media_type": "Text",
-            "formats": {
-                "text/html": "https://www.gutenberg.org/ebooks/84.html.images",
-                "application/epub+zip": "https://www.gutenberg.org/ebooks/84.epub3.images",
-                "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/84.kf8.images",
-                "application/rdf+xml": "https://www.gutenberg.org/ebooks/84.rdf",
-                "image/jpeg": "https://www.gutenberg.org/cache/epub/84/pg84.cover.medium.jpg",
-                "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/84.txt.utf-8",
-                "application/octet-stream": "https://www.gutenberg.org/cache/epub/84/pg84-h.zip"
-            },
-            "download_count": 78467
-        },
-        {
-            "id": 84,
-            "title": "Frankenstein; Or, The Modern Prometheus",
-            "authors": [
-                {
-                    "name": "Shelley, Mary Wollstonecraft",
-                    "birth_year": 1797,
-                    "death_year": 1851
-                }
-            ],
-            "translators": [],
-            "subjects": [
-                "Frankenstein's monster (Fictitious character) -- Fiction",
-                "Frankenstein, Victor (Fictitious character) -- Fiction",
-                "Gothic fiction",
-                "Horror tales",
-                "Monsters -- Fiction",
-                "Science fiction",
-                "Scientists -- Fiction"
-            ],
-            "bookshelves": [
-                "Browsing: Culture/Civilization/Society",
-                "Browsing: Fiction",
-                "Browsing: Gender & Sexuality Studies",
-                "Browsing: Literature",
-                "Browsing: Science-Fiction & Fantasy",
-                "Gothic Fiction",
-                "Movie Books",
-                "Precursors of Science Fiction",
-                "Science Fiction by Women"
-            ],
-            "languages": [
-                "en"
-            ],
-            "copyright": false,
-            "media_type": "Text",
-            "formats": {
-                "text/html": "https://www.gutenberg.org/ebooks/84.html.images",
-                "application/epub+zip": "https://www.gutenberg.org/ebooks/84.epub3.images",
-                "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/84.kf8.images",
-                "application/rdf+xml": "https://www.gutenberg.org/ebooks/84.rdf",
-                "image/jpeg": "https://www.gutenberg.org/cache/epub/84/pg84.cover.medium.jpg",
-                "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/84.txt.utf-8",
-                "application/octet-stream": "https://www.gutenberg.org/cache/epub/84/pg84-h.zip"
-            },
-            "download_count": 78467
-        },
-        {
-            "id": 84,
-            "title": "Frankenstein; Or, The Modern Prometheus",
-            "authors": [
-                {
-                    "name": "Shelley, Mary Wollstonecraft",
-                    "birth_year": 1797,
-                    "death_year": 1851
-                }
-            ],
-            "translators": [],
-            "subjects": [
-                "Frankenstein's monster (Fictitious character) -- Fiction",
-                "Frankenstein, Victor (Fictitious character) -- Fiction",
-                "Gothic fiction",
-                "Horror tales",
-                "Monsters -- Fiction",
-                "Science fiction",
-                "Scientists -- Fiction"
-            ],
-            "bookshelves": [
-                "Browsing: Culture/Civilization/Society",
-                "Browsing: Fiction",
-                "Browsing: Gender & Sexuality Studies",
-                "Browsing: Literature",
-                "Browsing: Science-Fiction & Fantasy",
-                "Gothic Fiction",
-                "Movie Books",
-                "Precursors of Science Fiction",
-                "Science Fiction by Women"
-            ],
-            "languages": [
-                "en"
-            ],
-            "copyright": false,
-            "media_type": "Text",
-            "formats": {
-                "text/html": "https://www.gutenberg.org/ebooks/84.html.images",
-                "application/epub+zip": "https://www.gutenberg.org/ebooks/84.epub3.images",
-                "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/84.kf8.images",
-                "application/rdf+xml": "https://www.gutenberg.org/ebooks/84.rdf",
-                "image/jpeg": "https://www.gutenberg.org/cache/epub/84/pg84.cover.medium.jpg",
-                "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/84.txt.utf-8",
-                "application/octet-stream": "https://www.gutenberg.org/cache/epub/84/pg84-h.zip"
-            },
-            "download_count": 78467
-        },
-        {
-            "id": 1513,
-            "title": "Romeo and Juliet",
-            "authors": [
-                {
-                    "name": "Shakespeare, William",
-                    "birth_year": 1564,
-                    "death_year": 1616
-                }
-            ],
-            "translators": [],
-            "subjects": [
-                "Conflict of generations -- Drama",
-                "Juliet (Fictitious character) -- Drama",
-                "Romeo (Fictitious character) -- Drama",
-                "Tragedies",
-                "Vendetta -- Drama",
-                "Verona (Italy) -- Drama",
-                "Youth -- Drama"
-            ],
-            "bookshelves": [
-                "Browsing: Fiction",
-                "Browsing: Literature",
-                "Browsing: Poetry"
-            ],
-            "languages": [
-                "en"
-            ],
-            "copyright": false,
-            "media_type": "Text",
-            "formats": {
-                "text/html": "https://www.gutenberg.org/ebooks/1513.html.images",
-                "application/epub+zip": "https://www.gutenberg.org/ebooks/1513.epub3.images",
-                "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/1513.kf8.images",
-                "application/rdf+xml": "https://www.gutenberg.org/ebooks/1513.rdf",
-                "image/jpeg": "https://www.gutenberg.org/cache/epub/1513/pg1513.cover.medium.jpg",
-                "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/1513.txt.utf-8",
-                "application/octet-stream": "https://www.gutenberg.org/cache/epub/1513/pg1513-h.zip"
-            },
-            "download_count": 62300
-        },
-        {
-            "id": 1342,
-            "title": "Pride and Prejudice",
-            "authors": [
-                {
-                    "name": "Austen, Jane",
-                    "birth_year": 1775,
-                    "death_year": 1817
-                }
-            ],
-            "translators": [],
-            "subjects": [
-                "Courtship -- Fiction",
-                "Domestic fiction",
-                "England -- Fiction",
-                "Love stories",
-                "Sisters -- Fiction",
-                "Social classes -- Fiction",
-                "Young women -- Fiction"
-            ],
-            "bookshelves": [
-                "Best Books Ever Listings",
-                "Browsing: Culture/Civilization/Society",
-                "Browsing: Fiction",
-                "Browsing: Literature",
-                "Harvard Classics"
-            ],
-            "languages": [
-                "en"
-            ],
-            "copyright": false,
-            "media_type": "Text",
-            "formats": {
-                "text/html": "https://www.gutenberg.org/ebooks/1342.html.images",
-                "application/epub+zip": "https://www.gutenberg.org/ebooks/1342.epub3.images",
-                "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/1342.kf8.images",
-                "application/rdf+xml": "https://www.gutenberg.org/ebooks/1342.rdf",
-                "image/jpeg": "https://www.gutenberg.org/cache/epub/1342/pg1342.cover.medium.jpg",
-                "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/1342.txt.utf-8",
-                "application/octet-stream": "https://www.gutenberg.org/cache/epub/1342/pg1342-h.zip"
-            },
-            "download_count": 58812
-        },
-        {
-            "id": 2701,
-            "title": "Moby Dick; Or, The Whale",
-            "authors": [
-                {
-                    "name": "Melville, Herman",
-                    "birth_year": 1819,
-                    "death_year": 1891
-                }
-            ],
-            "translators": [],
-            "subjects": [
-                "Adventure stories",
-                "Ahab, Captain (Fictitious character) -- Fiction",
-                "Mentally ill -- Fiction",
-                "Psychological fiction",
-                "Sea stories",
-                "Ship captains -- Fiction",
-                "Whales -- Fiction",
-                "Whaling -- Fiction",
-                "Whaling ships -- Fiction"
-            ],
-            "bookshelves": [
-                "Best Books Ever Listings",
-                "Browsing: Fiction",
-                "Browsing: Literature"
-            ],
-            "languages": [
-                "en"
-            ],
-            "copyright": false,
-            "media_type": "Text",
-            "formats": {
-                "text/html": "https://www.gutenberg.org/ebooks/2701.html.images",
-                "text/html; charset=utf-8": "https://www.gutenberg.org/files/2701/2701-h/2701-h.htm",
-                "application/epub+zip": "https://www.gutenberg.org/ebooks/2701.epub3.images",
-                "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/2701.kf8.images",
-                "text/plain; charset=utf-8": "https://www.gutenberg.org/files/2701/2701-0.txt",
-                "application/rdf+xml": "https://www.gutenberg.org/ebooks/2701.rdf",
-                "image/jpeg": "https://www.gutenberg.org/cache/epub/2701/pg2701.cover.medium.jpg",
-                "application/octet-stream": "https://www.gutenberg.org/cache/epub/2701/pg2701-h.zip",
-                "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/2701.txt.utf-8"
-            },
-            "download_count": 58362
-        },
-    ]);
+    const [data, setData] = useState([]);
     const { toast } = useToast();
     const [render, setRender] = useState(null)
     const [filters, setFilters] = useState({
         page: 0,
+        page_size: 24,
+        search: '',
+        topic: '',
     });
+
+    const options = [
+        "Adventure", "Science Fiction", "Fantasy", "Mystery", "Romance",
+        "Historical Fiction", "Horror", "Biography", "Autobiography", "Philosophy",
+        "Religion", "Politics", "Science", "Technology", "Mathematics",
+        "Economics", "Education", "Art", "Music", "Poetry", "Drama", "Literature",
+        "Classics", "Humor", "Travel", "Cooking", "Health & Fitness", "Self-Help",
+        "Psychology", "Nature", "Gardening", "Sports", "History", "Military",
+        "Children's Books", "Young Adult", "Crime", "Thriller", "Western",
+        "Essays", "Short Stories", "Folklore & Mythology", "Anthropology",
+        "Linguistics", "Sociology", "Law", "Medicine", "Astronomy", "Physics",
+        "Chemistry", "Engineering", "Architecture", "Environmental Studies",
+        "Geography", "Zoology", "Botany", "Astronomy", "Computing"
+    ];
 
 
     useEffect(() => {
-        // getBookList()
-    }, [filters]);
+        getBookList()
+    }, []);
 
     useEffect(() => {
         let oldWishlist = localStorage.getItem('wishlist')
@@ -316,10 +73,11 @@ const BookList = () => {
     }, [render]);
 
 
-    const getBookList = async () => {
+    const getBookList = async (filter = filters) => {
+        setLoading(true)
 
         try {
-            const response = await booksAPIs.getAllBook(filters)
+            const response = await booksAPIs.getAllBook(filter)
             if (response) {
                 // console.log('response ==>', response);
                 setTotalBooks(response?.count)
@@ -417,7 +175,7 @@ const BookList = () => {
                         </p>
                     </div>
 
-                    <div className="h-[75px]">
+                    <div className="md:h-[75px]">
                         {item?.subjects.slice(0, 3).map((subject, index) => (
                             <Badge key={index} className='bg-gray-500 text-white ml-2 mt-1'>
                                 {subject.split(' -- ')[0]}
@@ -467,8 +225,98 @@ const BookList = () => {
 
     return (
         <div className='py-5'>
+
+            {/* Filters */}
+            <div className='px-5'>
+                <CardContent className="flex flex-col lg:flex-row justify-between w-full max-w-[1560px] mb-7 mx-auto">
+                    <div className='flex items-center gap-5 flex-wrap'>
+                        <div className="w-full md:w-72">
+                            <p className='text-md text-primary mb-1'>Filter by Genre/Topic</p>
+
+                            <Select
+                                value={filters.topic}
+                                onValueChange={(value) => {
+                                    setFilters({ ...filters, topic: value })
+                                }}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select genre/topic" />
+                                </SelectTrigger>
+                                <SelectContent className='max-h-96' >
+                                    {options?.map((item, index) => {
+                                        return (
+                                            <SelectItem
+                                                key={item}
+                                                value={item}
+                                            >
+                                                {item}
+                                            </SelectItem>
+                                        )
+                                    })}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        <div className="w-full md:w-72">
+                            <p className='text-md text-primary mb-1'>Search by Title</p>
+
+                            <SearchInput
+                                type="text"
+                                id="search"
+                                placeholder="Search"
+                                className="placeholder:text-default"
+                                icon={filters?.search && filters?.search?.length > 0}
+                                value={filters?.search}
+                                onClear={() => {
+                                    setFilters({ ...filters, page: 0, search: '' })
+                                }}
+                                onChange={(e) => {
+                                    setFilters({ ...filters, page: 0, search: e.target.value })
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    <div className='flex items-center gap-3 justify-end mt-5 md:mt-0'>
+                        <p
+                            className='cursor-pointer underline text-tertiary'
+                            onClick={() => {
+                                setFilters({
+                                    page: 0,
+                                    page_size: 24,
+                                    search: '',
+                                    topic: '',
+                                })
+                                getBookList({
+                                    page: 0,
+                                    page_size: 24,
+                                    search: '',
+                                    topic: '',
+                                })
+                            }}
+                        >
+                            Clear filter
+                        </p>
+
+                        <Button
+                            onClick={() => getBookList()}
+                        >
+                            Filter
+                        </Button>
+                    </div>
+                </CardContent>
+            </div>
+
+            {!loading && data?.length < 1 &&
+                <NoData />
+            }
+
+            {loading && router?.isReady &&
+                <CustomLoader msg={getRandomLoadingMsgs()} />
+            }
+
             <div className='flex justify-center mb-10 w-full'>
-                {data?.length > 0 && !loading ?
+                {data?.length > 0 && !loading &&
                     <div className='w-full max-w-[1610px] flex flex-wrap gap-7 px-5 md:gap-3 lg:gap-7 justify-center animate-fadeInUp'>
                         {data?.length > 0 && data.map((item, index) => {
                             return (
@@ -480,8 +328,6 @@ const BookList = () => {
                         })
                         }
                     </div>
-                    :
-                    <CustomLoader />
                 }
             </div>
 
@@ -515,7 +361,7 @@ const BookList = () => {
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
-        </div >
+        </div>
     );
 };
 
