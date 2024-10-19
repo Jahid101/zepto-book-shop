@@ -226,7 +226,7 @@ const BookList = () => {
         <div className='py-5'>
 
             {/* Filters */}
-            <div className='px-5'>
+            <div className='px-5 flex justify-center'>
                 <CardContent className="flex flex-col lg:flex-row justify-end gap-5 w-full max-w-[1560px] mb-7 mx-autos">
                     <div className='flex items-center gap-5 flex-wrap'>
                         <div className="w-full md:w-72">
